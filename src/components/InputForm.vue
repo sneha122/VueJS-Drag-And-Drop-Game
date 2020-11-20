@@ -3,7 +3,7 @@
     <div class="m-bottom-24 heading">Create Name, Animal, Place, Thing</div>
     <form @submit.prevent="FormSubmitted()">
       <div v-if="errors.length" class="m-bottom-24">
-        <b>Please correct the following error(s):</b>
+        <b>{{$t('InputForm.error-message')}}</b>
         <div>
           <div v-for="error in errors" v-bind:key="error" class="error">
             {{ error }}
@@ -17,14 +17,14 @@
       </div>
       <div class="m-bottom-24">
         <label style="font-size: 1.2em; margin-right: 24px;">
-          Enter Name:
+          {{$t('InputForm.input-label')}}
         </label>
         <input type="text" v-model="item.name" class="name-input"
           placeholder="Enter name,place,animal or thing"/>
       </div>
       <button type="button" @click="saveBtnClicked()"
         class="save-button">
-        Save
+        {{$t('InputForm.save-button-label')}}
       </button>
     </form>
   </div>
@@ -46,19 +46,19 @@ export default {
       errors: [],
       radioButtonList: [
         {
-          label: 'Name',
+          label: this.$t('InputForm.radio-button-name-label'),
           radioType: 0
         },
         {
-          label: 'Animal',
+          label: this.$t('InputForm.radio-button-animal-label'),
           radioType: 1
         },
         {
-          label: 'Place',
+          label: this.$t('InputForm.radio-button-place-label'),
           radioType: 2
         },
         {
-          label: 'Thing',
+          label: this.$t('InputForm.radio-button-thing-label'),
           radioType: 3
         }
       ],
@@ -81,7 +81,7 @@ export default {
     saveBtnClicked () {
       this.errors = []
       if (this.item.name === '') {
-        this.errors.push('Name is required')
+        this.errors.push(this.$t('InputForm.name-required-error-message'))
         return
       }
       this.item.id = this.counter

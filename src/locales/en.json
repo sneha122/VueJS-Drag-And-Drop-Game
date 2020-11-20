@@ -1,0 +1,16 @@
+{
+  "message": "hello i18n !!",
+  "HelloWorld.drop-target-label": "dropTarget",
+  "HelloWorld.name-column-label": "Name Column",
+  "HelloWorld.animal-column-label": "Animal Column",
+  "HelloWorld.place-column-label": "Place Column",
+  "HelloWorld.thing-column-label": "Thing Column",
+  "InputForm.input-label": "Enter Name:",
+  "InputForm.error-message": "Please correct the following error(s):",
+  "InputForm.save-button-label": "Save",
+  "InputForm.name-required-error-message": "Name is required",
+  "InputForm.radio-button-name-label": "Name",
+  "InputForm.radio-button-animal-label": "Animal",
+  "InputForm.radio-button-place-label": "Place",
+  "InputForm.radio-button-thing-label": "Thing"
+}

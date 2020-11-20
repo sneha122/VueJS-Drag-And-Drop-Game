@@ -14,7 +14,7 @@
     </div>
     <div class="drop-container" v-show="listValues.length">
       <div class="name-column column">
-        <div class="column-name">Name Column</div>
+        <div class="column-name">{{$t('HelloWorld.name-column-label')}}</div>
         <div class="name-drop-class drop-class"
           @drop="drop($event)" @dragover="allowDrop($event)"
           @dragenter="enterDrag($event)" @dragleave="leaveDrag($event)"
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="animal-column column">
-        <div class="column-name">Animal Column</div>
+        <div class="column-name">{{$t('HelloWorld.animal-column-label')}}</div>
         <div class="animal-drop-class drop-class"
           @drop="drop($event)" @dragover="allowDrop($event)"
           @dragenter="enterDrag($event)" @dragleave="leaveDrag($event)"
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="place-column column">
-        <div class="column-name">Place Column</div>
+        <div class="column-name">{{$t('HelloWorld.place-column-label')}}</div>
         <div class="place-drop-class drop-class"
           @drop="drop($event)" @dragover="allowDrop($event)"
           @dragenter="enterDrag($event)" @dragleave="leaveDrag($event)"
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="thing-column column">
-        <div class="column-name">Thing Column</div>
+        <div class="column-name">{{$t('HelloWorld.thing-column-label')}}</div>
         <div class="thing-drop-class drop-class"
           @drop="drop($event)" @dragover="allowDrop($event)"
           @dragenter="enterDrag($event)" @dragleave="leaveDrag($event)"
@@ -84,6 +84,7 @@ export default {
         console.log(error)
         this.$preloaders.close()
       })
+    console.log(this.msg)
   },
   methods: {
     itemAdded (itemKey) {
@@ -125,19 +126,23 @@ export default {
       }
     },
     enterDrag (event) {
-      if (event.target.id.split('_')[0] === 'dropTarget') {
+      if (event.target.id.split('_')[0] === this.$t('HelloWorld.drop-target-label')) {
         event.preventDefault()
-        event.target.style.border = '3px dotted red'
+        event.target.classList.add('highlight-element')
       }
     },
     leaveDrag (event) {
-      if (event.target.id.split('_')[0] === 'dropTarget') {
+      if (event.target.id.split('_')[0] === this.$t('HelloWorld.drop-target-label')) {
         event.preventDefault()
         this.resetStyles(event)
       }
     },
     resetStyles (event) {
-      event.target.style.border = ''
+      const isClassPresent = event.target.classList
+        .contains('highlight-element')
+      if (isClassPresent) {
+        event.target.classList.remove('highlight-element')
+      }
     },
     fetchData () {
       return axios
@@ -172,7 +177,8 @@ export default {
     min-height: 52px;
     border: 1px solid;
     width: inherit;
-    margin-right: 24px;
+    margin-right: 12px;
+    margin-left: 12px;
   }
   .column-name {
     margin-bottom: 24px;
@@ -197,5 +203,9 @@ export default {
     margin-top: 12px;
     margin-left: 8px;
     margin-right: 8px;
+  }
+  .highlight-element {
+    border: 3px dotted red;
+    transform: scale(1.1);
   }
 </style>
